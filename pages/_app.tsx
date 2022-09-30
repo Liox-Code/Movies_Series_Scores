@@ -1,6 +1,7 @@
 import React from 'react'
 import { AppProps } from 'next/app'
 import { createGlobalStyle } from 'styled-components'
+import Layout from '../components/Layout'
 
 const GlobalStyle = createGlobalStyle`
     *{
@@ -8,6 +9,8 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         font-family: Arial;
+        border: none;
+        outline: none;
     }
 
     html{
@@ -89,10 +92,10 @@ const GlobalStyle = createGlobalStyle`
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
-    <>
+    <Layout>
       <GlobalStyle />
       <Component {...pageProps} />
-    </>
+    </Layout>
   )
 }
 

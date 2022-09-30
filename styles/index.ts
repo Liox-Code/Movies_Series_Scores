@@ -1,14 +1,11 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  display: grid;
-  align-items: center;
-  justify-items: center;
-  grid-auto-rows: minmax(100vh, max-content);
   background-color: var(--black);
+  padding: 28px 20px;
 `
 
-export const Text = styled.span`
-  font-size: 12rem;
-  color: var(--white);
+export const Title = styled.h1`
+  color: var(--complementary-02-color);
+  font-size: 2.4rem;
 `

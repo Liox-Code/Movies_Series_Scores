@@ -13,6 +13,13 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@components-ui/*": ["components-ui/*"],
+      "@hooks/*": ["hooks/*"],
+      "@public/*": ["public/*"]
+    },
     "jsx": "preserve"
   },
   "include": ["next-env.d.ts", "**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],

@@ -57,6 +57,7 @@
         "specialLink": ["hrefLeft", "hrefRight"],
         "aspects": ["invalidHref", "preferButton"]
       }
-    ]
+    ],
+    "react-hooks/rules-of-hooks": "off"
   }
 }
