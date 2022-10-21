@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 
+// Hooks
+import useIfClickedOutside from '@hooks/useIfClickedOutside'
+
+// Styles
 import * as S from './styles'
 
 const Navbar = () => {
@@ -15,17 +19,7 @@ const Navbar = () => {
     {
       id: 'lk-02',
       text: 'Trends',
-      path: '/Trends'
-    },
-    {
-      id: 'lk-03',
-      text: 'Categories',
-      path: '/Categories'
-    },
-    {
-      id: 'lk-04',
-      text: 'Search',
-      path: '/Search'
+      path: '/trends'
     }
   ]
 
@@ -33,8 +27,13 @@ const Navbar = () => {
     setShowMenu(!showMenu)
   }
 
+  const IfClickedOutside = useIfClickedOutside(() => {
+    console.log('cerrar')
+    setShowMenu(false)
+  })
+
   return (
-    <S.Container>
+    <S.Container ref={IfClickedOutside}>
       {showMenu && (
         <S.Navbar>
           {Links.map(({ id, text, path }) => {
@@ -46,9 +45,9 @@ const Navbar = () => {
           })}
         </S.Navbar>
       )}
-      <S.CloseButton onClick={toggleNavbar}>
+      <S.ToggleButton onClick={toggleNavbar}>
         {showMenu ? 'CERRAR' : 'ABRIR'}
-      </S.CloseButton>
+      </S.ToggleButton>
     </S.Container>
   )
 }

@@ -2,6 +2,7 @@ import React from 'react'
 
 // Components
 import Navbar from '@components/Navbar'
+import Theme from '@components/Theme'
 
 // Styles
 import * as S from './styles'
@@ -12,13 +13,15 @@ type TLayoutProps = {
 
 const Layout: React.FC<TLayoutProps> = ({ children }: TLayoutProps) => {
   return (
-    <S.Container>
-      <S.TopBar>
-        <Navbar />
-      </S.TopBar>
-      {children}
-      <S.BottomBar>Hecho por @Liox 😊</S.BottomBar>
-    </S.Container>
+    <Theme>
+      <S.Container>
+        <S.TopBar>
+          <Navbar />
+        </S.TopBar>
+        <S.MiddleContainer>{children}</S.MiddleContainer>
+        <S.BottomBar>Hecho por @Liox 😊</S.BottomBar>
+      </S.Container>
+    </Theme>
   )
 }
 

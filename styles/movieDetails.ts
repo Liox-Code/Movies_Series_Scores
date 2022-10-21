@@ -1,32 +1,29 @@
 import styled from 'styled-components'
 
+// Components
+import PosterImage from '@components-ui/PosterImage'
+
 export const Container = styled.section`
   display: grid;
-  grid-template-rows: 120px max-content 60px auto;
+  grid-template-rows: 120px max-content 60px max-content;
+  justify-items: center;
   width: 100%;
   background-color: var(--black);
 `
 
 export const PortraitImageTop = styled.div`
   grid-area: 1 / 1 / 2 / 2;
+  display: grid;
+  justify-content: start;
+  width: 100%;
   padding: 20px;
   background: linear-gradient(180deg, var(--black) 10%, transparent);
   z-index: 1;
 `
 
-export const ReturnButton = styled.button`
-  height: 40px;
-  width: 80px;
-  background-color: transparent;
-  color: var(--white);
-  font-size: 2rem;
-`
-
-export const PortraitImage = styled.button`
-  grid-area: 1 / 1 / 4 / 2;
-  width: 100%;
-  max-height: 900px;
-  max-width: 600px;
+export const PortraitImage = styled(PosterImage)`
+  grid-area: 1 / 1 / 5 / 2;
+  max-height: 1200px;
   z-index: 0;
 `
 
@@ -37,6 +34,7 @@ export const DescriptionContainer = styled.div`
   grid-gap: 20px;
   min-height: 200px;
   z-index: 1;
+  margin: 20px;
   padding: 40px 20px;
   background-color: var(--black);
   border-radius: 20px 20px 0 0;

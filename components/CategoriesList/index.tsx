@@ -30,9 +30,9 @@ const CategoriesList: React.FC<TCarrousel> = ({
         {listGenres.map(({ id, name }) => {
           return (
             <Link href={`/genres/${id}`} key={id} passHref>
-              <a>
+              <S.AnchorListItem>
                 <ListItem text={name} />
-              </a>
+              </S.AnchorListItem>
             </Link>
           )
         })}

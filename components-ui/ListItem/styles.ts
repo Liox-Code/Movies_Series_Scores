@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.article`
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: max-content;
+  grid-template-columns: max-content min-content;
   grid-gap: 12px;
 `
 
@@ -17,4 +17,7 @@ export const Decorator = styled.div`
 export const Text = styled.span`
   color: var(--white);
   font-size: 1.6rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: min-content;
 `

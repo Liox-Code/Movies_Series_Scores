@@ -3,11 +3,12 @@ import { useRouter } from 'next/router'
 
 // Components
 import PosterImage from '@components-ui/PosterImage'
+import Button from '@components-ui/Button'
 import Carrousel from '@components/Carrousel'
 import CategoriesList from '@components/CategoriesList'
 
 // Hooks
-import axiosFetch from '@hooks/axios'
+import axiosFetch from '@hooks/useAxios'
 
 // Styles
 import * as S from '../../styles/movieDetails'
@@ -67,16 +68,14 @@ const movieDetail = () => {
       {details && (
         <>
           <S.PortraitImageTop>
-            <S.ReturnButton>Volver</S.ReturnButton>
+            <Button action="previousPage">Volver</Button>
           </S.PortraitImageTop>
-          <S.PortraitImage>
-            <PosterImage
-              key={details.id}
-              src={`${baseSrc}${details.poster_path}`}
-              title={details.title}
-              path={`/movieDetails/${details.id}`}
-            />
-          </S.PortraitImage>
+          <S.PortraitImage
+            key={details.id}
+            src={`${baseSrc}${details.poster_path}`}
+            title={details.title}
+            path={`/movieDetails/${details.id}`}
+          />
           <S.DescriptionContainer>
             <S.DescriptionTop>
               <S.Title>{details.title}</S.Title>

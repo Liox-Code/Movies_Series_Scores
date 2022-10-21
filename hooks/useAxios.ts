@@ -6,7 +6,7 @@ const axiosFetch = axios.create({
     'Content-Type': 'application/json'
   },
   params: {
-    api_key: '62ee113e14ae125e3f29bfa76cda3bc3'
+    api_key: process.env.NEXT_PUBLIC_API_KEY
   }
 })
 

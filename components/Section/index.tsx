@@ -18,7 +18,9 @@ const Section: React.FC<TSection> = ({
     <S.Container>
       <S.Title>{title}</S.Title>
       {onClick && (
-        <S.ShowMoreButton onClick={onClick}>Show More</S.ShowMoreButton>
+        <S.ShowMoreButton color="red01" onClick={onClick}>
+          Show More
+        </S.ShowMoreButton>
       )}
       <S.ContentContainer>{children}</S.ContentContainer>
     </S.Container>

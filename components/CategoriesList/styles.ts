@@ -15,9 +15,11 @@ export const Title = styled.h2`
 export const ListContainer = styled.div`
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  grid-auto-rows: max-content;
-  grid-auto-columns: max-content;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   grid-gap: 12px;
   width: 100%;
+`
+
+export const AnchorListItem = styled.a`
+  text-decoration: none;
 `

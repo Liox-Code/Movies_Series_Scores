@@ -7,7 +7,7 @@ export const Container = styled.div`
   padding: 0 20px;
 `
 
-export const CloseButton = styled.button`
+export const ToggleButton = styled.button`
   height: 40px;
   border: none;
   outline: none;
@@ -22,7 +22,9 @@ export const Navbar = styled.div`
   display: grid;
   grid-auto-flow: rows;
   grid-auto-rows: 40px;
+  min-width: 320px;
   width: 100%;
+  max-width: 400px;
   z-index: 100;
 `
 

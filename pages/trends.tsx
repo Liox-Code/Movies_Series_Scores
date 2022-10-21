@@ -1,10 +1,11 @@
 import React from 'react'
 
 // Components
+import Button from '@components-ui/Button'
 import PosterImage from '@components-ui/PosterImage'
 
 // Hooks
-import axiosFetch from '@hooks/axios'
+import axiosFetch from '@hooks/useAxios'
 
 // Styles
 import * as S from '../styles/trends'
@@ -40,7 +41,9 @@ type TTrends = {
 const trends: React.FC<TTrends> = ({ data }: TTrends) => {
   return (
     <S.Container>
-      <S.ReturnButton>Volver</S.ReturnButton>
+      <Button action="previousPage" color="red01">
+        Volver
+      </Button>
       <S.Title>Trends</S.Title>
       <S.Content>
         {data.map(movieData => {

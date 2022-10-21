@@ -2,9 +2,10 @@ import React from 'react'
 
 // Components
 import PosterImage from '@components-ui/PosterImage'
+import Button from '@components-ui/Button'
 
 // Hooks
-import axiosFetch from '@hooks/axios'
+import axiosFetch from '@hooks/useAxios'
 
 // Styles
 import * as S from '../../styles/genres'
@@ -72,7 +73,9 @@ type TCategoryPost = {
 const categoryPost: React.FC<TCategoryPost> = ({ data }: TCategoryPost) => {
   return (
     <S.Container>
-      <S.ReturnButton>Volver</S.ReturnButton>
+      <Button action="previousPage" color="red01">
+        Volver
+      </Button>
       <S.Title>Titulo</S.Title>
       <S.Content>
         {data.map(movieData => {

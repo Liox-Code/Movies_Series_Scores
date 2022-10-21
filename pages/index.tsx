@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 
 // Components
 import SearchInput from '@components-ui/SearchInput'
@@ -6,7 +7,7 @@ import Carrousel from '@components/Carrousel'
 import CategoriesList from '@components/CategoriesList'
 
 // Hooks
-import axiosFetch from '@hooks/axios'
+import axiosFetch from '@hooks/useAxios'
 
 // Styles
 import * as S from '../styles/index'
@@ -48,18 +49,50 @@ type TIndex = {
 }
 
 const index: React.FC<TIndex> = ({ trendsData, genresData }: TIndex) => {
-  const onClick = () => {
-    console.log('onClick')
+  const router = useRouter()
+  const [searchTxt, setSearchTxt] = useState({ searchValue: '' })
+
+  const navigateTo = (pathName: string) => {
+    router.push(pathName)
   }
+
+  const Search = ({ searchValue }: { searchValue: string }) => {
+    router.push({
+      pathname: '/search/[searchText]',
+      query: { searchText: searchValue }
+    })
+  }
+
+  const ChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { target } = e
+    const { value: inputValue } = target
+    setSearchTxt({ searchValue: inputValue })
+  }
+
+  const ClickSearch = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    Search(searchTxt)
+  }
+
   return (
     <S.Container>
       <S.Title>Platzi Movies</S.Title>
-      <SearchInput />
-      <Carrousel title="Trends" listMovies={trendsData} onClick={onClick} />
+      <SearchInput
+        onClick={ClickSearch}
+        onChange={ChangeText}
+        inputValue={searchTxt.searchValue}
+      />
+      <Carrousel
+        title="Trends"
+        listMovies={trendsData}
+        onClick={() => {
+          navigateTo('/trends')
+        }}
+      />
       <CategoriesList
         title="Categories"
         listGenres={genresData}
-        onClick={onClick}
+        onClick={null}
       />
     </S.Container>
   )

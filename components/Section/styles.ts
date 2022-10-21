@@ -1,5 +1,8 @@
 import styled from 'styled-components'
 
+// Components
+import Button from '@components-ui/Button'
+
 export const Container = styled.section`
   display: grid;
   grid-template-areas:
@@ -17,13 +20,10 @@ export const Title = styled.h2`
   font-size: 2rem;
 `
 
-export const ShowMoreButton = styled.button`
+export const ShowMoreButton = styled(Button)`
   grid-area: button;
   justify-self: end;
-  padding: 8px;
-  border-radius: 8px;
-  background-color: var(--primary-color);
-  color: white;
+  width: 160px;
 `
 
 export const ContentContainer = styled.div`

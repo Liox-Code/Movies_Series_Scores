@@ -1,13 +1,27 @@
-import React from 'react'
+import React, { ChangeEventHandler, MouseEventHandler } from 'react'
 
 // Styles
 import * as S from './styles'
 
-const SearchInput = () => {
+type TSearchInput = {
+  inputValue: string | string[]
+  onChange: ChangeEventHandler<HTMLInputElement> | undefined
+  onClick: MouseEventHandler<HTMLButtonElement> | undefined
+}
+
+const SearchInput: React.FC<TSearchInput> = ({
+  inputValue,
+  onChange,
+  onClick
+}: TSearchInput) => {
   return (
     <S.Container>
-      <S.SearchInputText />
-      <S.SearchButton>Buscar</S.SearchButton>
+      <S.SearchInputText
+        name="SearchInputText"
+        onChange={onChange}
+        value={inputValue}
+      />
+      <S.SearchButton onClick={onClick}>Buscar</S.SearchButton>
     </S.Container>
   )
 }

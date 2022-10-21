@@ -8,14 +8,6 @@ export const Container = styled.section`
   background-color: var(--black);
 `
 
-export const ReturnButton = styled.button`
-  min-height: 40px;
-  padding: 0 20px;
-  background-color: var(--primary-color);
-  color: var(--white);
-  font-size: 1.6rem;
-`
-
 export const Title = styled.h1`
   color: var(--complementary-02-color);
   font-size: 2.4rem;
@@ -24,6 +16,7 @@ export const Title = styled.h1`
 export const Content = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-auto-rows: 200px;
   grid-gap: 12px;
   width: 100%;
 `

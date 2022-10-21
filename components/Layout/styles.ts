@@ -8,12 +8,25 @@ export const Container = styled.div`
 
 export const TopBar = styled.div`
   display: grid;
+  grid-template-columns: minmax(320px, 1200px);
+  justify-content: center;
   height: 40px;
+  width: 100%;
   background-color: var(--primary-color);
+`
+
+export const MiddleContainer = styled.div`
+  display: grid;
+  grid-template-columns: minmax(320px, 1200px);
+  justify-content: center;
+  width: 100%;
+  background-color: var(--black);
 `
 
 export const BottomBar = styled.div`
   display: grid;
+  grid-template-columns: minmax(320px, 1200px);
+  justify-content: center;
   align-items: center;
   justify-items: center;
   height: 40px;

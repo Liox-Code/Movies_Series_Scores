@@ -15,7 +15,7 @@ export const SearchInputText = styled.input`
 `
 
 export const SearchButton = styled.button`
-  height: 40px;
+  height: 100%;
   padding: 8px;
   background-color: var(--secondary-color);
   color: var(--black);

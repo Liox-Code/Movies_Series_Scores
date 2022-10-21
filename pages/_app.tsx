@@ -13,6 +13,25 @@ const GlobalStyle = createGlobalStyle`
         outline: none;
     }
 
+    *::-webkit-scrollbar {
+      width: 1rem;
+      height: 0.8rem;
+      cursor: pointer;
+    }
+
+    *::-webkit-scrollbar-track {
+      background: var(--complementary-07-color);
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background: var(--secondary-color);
+      border-radius: 2rem;
+    }
+
+    *::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-color);
+    }
+
     html{
         font-size: 62.5%;
     }
