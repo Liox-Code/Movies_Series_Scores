@@ -54,6 +54,7 @@ const GlobalStyle = createGlobalStyle`
       /* --complementary-12-color: #F72585; */
 
       --white: #F1FAEE;
+      --gray:#C1CFD6;
       --black: #161616;
       --black-light:#222222;
       --error-color: #c2272d;

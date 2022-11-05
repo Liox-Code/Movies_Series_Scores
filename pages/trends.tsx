@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { AxiosRequestConfig } from 'axios'
 
 // Components
 import Button from '@components-ui/Button'
@@ -6,20 +7,20 @@ import PosterImage from '@components-ui/PosterImage'
 
 // Hooks
 import axiosFetch from '@hooks/useAxios'
+import useRequest from '@hooks/useRequest'
 
 // Styles
 import * as S from '../styles/trends'
 
 export const getStaticProps = async () => {
   try {
-    const { data } = await axiosFetch('/trending/movie/week')
+    const { data } = await axiosFetch('/movie/popular')
     return {
       props: {
         data: data.results
       }
     }
   } catch (error) {
-    console.error(error)
     return {
       props: {
         data: []
@@ -29,9 +30,20 @@ export const getStaticProps = async () => {
 }
 
 interface IPosterImage {
-  id: string
-  title: string
+  adult: boolean
+  backdrop_path: string
+  genre_ids: number[]
+  id: number
+  original_language: string
+  original_title: string
+  overview: string
+  popularity: number
   poster_path: string
+  release_date: string
+  title: string
+  video: boolean
+  vote_average: number
+  vote_count: number
 }
 
 type TTrends = {
@@ -39,6 +51,34 @@ type TTrends = {
 }
 
 const trends: React.FC<TTrends> = ({ data }: TTrends) => {
+  const [pageNum, setPageNum] = useState(2)
+
+  const getMovieTrends = async (
+    pageParams = 1,
+    options: AxiosRequestConfig = {}
+  ) => {
+    const { data: newData } = await axiosFetch('/movie/popular', {
+      ...options,
+      params: { page: pageParams }
+    })
+
+    return newData
+  }
+
+  const { results, isLoading, hasNextPage } = useRequest(
+    getMovieTrends,
+    pageNum,
+    data
+  )
+
+  const getMoreResponses = () => {
+    if (isLoading) return
+
+    if (hasNextPage) {
+      setPageNum(prev => prev + 1)
+    }
+  }
+
   return (
     <S.Container>
       <Button action="previousPage" color="red01">
@@ -46,7 +86,7 @@ const trends: React.FC<TTrends> = ({ data }: TTrends) => {
       </Button>
       <S.Title>Trends</S.Title>
       <S.Content>
-        {data.map(movieData => {
+        {results.map(movieData => {
           const { id, title, poster_path: posterPath } = movieData
           const baseSrc = 'https://image.tmdb.org/t/p/w300'
           return (
@@ -58,6 +98,9 @@ const trends: React.FC<TTrends> = ({ data }: TTrends) => {
             />
           )
         })}
+        <Button onClick={getMoreResponses} color="red01">
+          Load More
+        </Button>
       </S.Content>
     </S.Container>
   )
