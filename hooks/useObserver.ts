@@ -17,7 +17,6 @@ const useObserver = ({
     if (observer.current) observer.current.disconnect()
     observer.current = new window.IntersectionObserver(
       ([observerEntries]) => {
-        // console.log(observerEntries)
         return setEntry(observerEntries)
       },
       { root, rootMargin, threshold }

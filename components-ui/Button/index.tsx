@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import { useRouter } from 'next/router'
 
 // Styles
@@ -9,7 +9,7 @@ type TButton = {
   className?: string
   action?: string
   color?: string
-  onClick?: () => void
+  onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
 const Button: React.FC<TButton> = (props: TButton) => {
@@ -24,12 +24,12 @@ const Button: React.FC<TButton> = (props: TButton) => {
     previousPage: ReturnPreviousPage
   }
 
-  const EventOnClick = () => {
+  const EventOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (action) {
       listActions[action]()
     }
     if (onClick) {
-      onClick()
+      onClick(e)
     }
   }
 

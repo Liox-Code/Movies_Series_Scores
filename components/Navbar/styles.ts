@@ -13,6 +13,7 @@ export const ToggleButton = styled.button`
   outline: none;
   background-color: transparent;
   color: var(--white);
+  cursor: pointer;
 `
 
 export const Navbar = styled.div`

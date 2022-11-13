@@ -37,6 +37,7 @@
       }
     ],
     "prettier/prettier": "error",
+    "react/display-name": "off",
     "react/require-default-props": 0,
     "react/jsx-filename-extension": [
       2,

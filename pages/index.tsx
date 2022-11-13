@@ -23,7 +23,6 @@ export const getStaticProps = async () => {
       }
     }
   } catch (error) {
-    console.error(error)
     return {
       props: {
         trendsData: [],
@@ -71,7 +70,9 @@ const index: React.FC<TIndex> = ({ trendsData, genresData }: TIndex) => {
 
   const ClickSearch = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
-    Search(searchTxt)
+    if (searchTxt.searchValue !== '') {
+      Search(searchTxt)
+    }
   }
 
   return (
@@ -89,11 +90,7 @@ const index: React.FC<TIndex> = ({ trendsData, genresData }: TIndex) => {
           navigateTo('/trends')
         }}
       />
-      <CategoriesList
-        title="Categories"
-        listGenres={genresData}
-        onClick={null}
-      />
+      <CategoriesList title="Categories" listGenres={genresData} />
     </S.Container>
   )
 }

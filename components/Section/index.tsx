@@ -6,7 +6,7 @@ import * as S from './styles'
 type TSection = {
   title: string
   children: JSX.Element | JSX.Element[]
-  onClick: (() => void) | null
+  onClick?: () => void
 }
 
 const Section: React.FC<TSection> = ({

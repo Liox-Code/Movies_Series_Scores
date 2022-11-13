@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AxiosRequestConfig } from 'axios'
 
 // Components
-import Button from '@components-ui/Button'
 import PosterImage from '@components-ui/PosterImage'
+import Button from '@components-ui/Button'
 
 // Hooks
 import axiosFetch from '@hooks/useAxios'
 import useRequest from '@hooks/useRequest'
+import useObserver from '@hooks/useObserver'
 
 // Styles
 import * as S from '../styles/trends'
@@ -53,6 +54,14 @@ type TTrends = {
 const trends: React.FC<TTrends> = ({ data }: TTrends) => {
   const [pageNum, setPageNum] = useState(2)
 
+  // const lastElement = useRef<HTMLElement | null>(null)
+
+  const [observer, lastElement, entry] = useObserver({
+    threshold: 0,
+    root: null,
+    rootMargin: '50%'
+  })
+
   const getMovieTrends = async (
     pageParams = 1,
     options: AxiosRequestConfig = {}
@@ -71,13 +80,18 @@ const trends: React.FC<TTrends> = ({ data }: TTrends) => {
     data
   )
 
-  const getMoreResponses = () => {
-    if (isLoading) return
+  useEffect(() => {
+    const getMoreResponses = () => {
+      if (isLoading) return
 
-    if (hasNextPage) {
-      setPageNum(prev => prev + 1)
+      if (hasNextPage) {
+        setPageNum(prev => prev + 1)
+      }
     }
-  }
+    if (entry?.isIntersecting) {
+      getMoreResponses()
+    }
+  }, [observer, entry, isLoading, hasNextPage])
 
   return (
     <S.Container>
@@ -86,9 +100,22 @@ const trends: React.FC<TTrends> = ({ data }: TTrends) => {
       </Button>
       <S.Title>Trends</S.Title>
       <S.Content>
-        {results.map(movieData => {
+        {results.map((movieData, i) => {
           const { id, title, poster_path: posterPath } = movieData
           const baseSrc = 'https://image.tmdb.org/t/p/w300'
+
+          if (i + 1 === results.length) {
+            return (
+              <PosterImage
+                key={id}
+                src={`${baseSrc}${posterPath}`}
+                title={title}
+                path={`/movieDetails/${id}`}
+                ref={lastElement}
+              />
+            )
+          }
+
           return (
             <PosterImage
               key={id}
@@ -98,9 +125,6 @@ const trends: React.FC<TTrends> = ({ data }: TTrends) => {
             />
           )
         })}
-        <Button onClick={getMoreResponses} color="red01">
-          Load More
-        </Button>
       </S.Content>
     </S.Container>
   )

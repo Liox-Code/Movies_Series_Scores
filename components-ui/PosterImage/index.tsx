@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef, Ref } from 'react'
 import Link from 'next/link'
 
 // Components
 import useObserver from '@hooks/useObserver'
+import useCombinedRefs from '@hooks/useCombinedRefs'
 
 // Styles
 import * as S from './styles'
@@ -14,45 +15,47 @@ type IPosterImage = {
   className?: string
 }
 
-const PosterImage: React.FC<IPosterImage> = (props: IPosterImage) => {
-  const { src, title, path, className } = props
+const PosterImage = React.forwardRef<HTMLElement | null, IPosterImage>(
+  (props: IPosterImage, ref: React.ForwardedRef<HTMLElement | null>) => {
+    const { src, title, path, className } = props
+    const [show, setShow] = useState(false)
+    const [srcImage, setSrcImage] = useState<string>(src)
+    const [observer, element, entry] = useObserver({
+      threshold: 0,
+      root: null,
+      rootMargin: '50%'
+    })
 
-  const [show, setShow] = useState(false)
-  const [srcImage, setSrcImage] = useState<string>(src)
+    useEffect(() => {
+      if (entry?.isIntersecting) {
+        setShow(true)
+      }
+    }, [observer, entry])
 
-  const [observer, element, entry] = useObserver({
-    threshold: 0,
-    root: null,
-    rootMargin: '50%'
-  })
+    const combineRef = useCombinedRefs(ref, element)
 
-  useEffect(() => {
-    if (entry?.isIntersecting) {
-      setShow(true)
-    }
-  }, [observer, entry])
-
-  return (
-    <S.Container className={className} ref={element}>
-      {srcImage && title && path && (
-        <Link href={path} passHref>
-          <a>
-            {show ? (
-              <S.ImageContainer
-                src={srcImage}
-                alt={title}
-                onError={() => {
-                  setSrcImage('/images/astronaut.jpg')
-                }}
-              />
-            ) : (
-              <S.ImageSkeleton />
-            )}
-          </a>
-        </Link>
-      )}
-    </S.Container>
-  )
-}
+    return (
+      <S.Container className={className} ref={combineRef}>
+        {srcImage && title && path && (
+          <Link href={path} passHref>
+            <a>
+              {show ? (
+                <S.ImageContainer
+                  src={srcImage}
+                  alt={title}
+                  onError={() => {
+                    setSrcImage('/images/astronaut.jpg')
+                  }}
+                />
+              ) : (
+                <S.ImageSkeleton />
+              )}
+            </a>
+          </Link>
+        )}
+      </S.Container>
+    )
+  }
+)
 
 export default PosterImage

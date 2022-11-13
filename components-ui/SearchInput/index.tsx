@@ -5,8 +5,8 @@ import * as S from './styles'
 
 type TSearchInput = {
   inputValue: string | string[]
-  onChange: ChangeEventHandler<HTMLInputElement> | undefined
-  onClick: MouseEventHandler<HTMLButtonElement> | undefined
+  onChange?: ChangeEventHandler<HTMLInputElement>
+  onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
 const SearchInput: React.FC<TSearchInput> = ({
@@ -21,7 +21,9 @@ const SearchInput: React.FC<TSearchInput> = ({
         onChange={onChange}
         value={inputValue}
       />
-      <S.SearchButton onClick={onClick}>Buscar</S.SearchButton>
+      <S.SearchButton onClick={onClick} color="blue01">
+        Buscar
+      </S.SearchButton>
     </S.Container>
   )
 }

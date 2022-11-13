@@ -12,6 +12,7 @@ const SCButton = styled.button`
   padding: 8px;
   border-radius: 8px;
   font-size: 2rem;
+  cursor: pointer;
 `
 
 export default SCButton

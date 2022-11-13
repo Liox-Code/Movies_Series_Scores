@@ -15,8 +15,8 @@ interface IListMovies {
 
 type TCarrousel = {
   title: string
-  onClick: () => void
   listMovies: IListMovies[]
+  onClick?: () => void
 }
 
 const Carrousel: React.FC<TCarrousel> = ({

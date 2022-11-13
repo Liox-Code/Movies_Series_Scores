@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 // Components
-import PosterImage from '@components-ui/PosterImage'
 import Button from '@components-ui/Button'
 import Carrousel from '@components/Carrousel'
 import CategoriesList from '@components/CategoriesList'
@@ -41,7 +40,6 @@ const movieDetail = () => {
   useEffect(() => {
     const { movieId } = router.query
 
-    console.log(router)
     if (!router.isReady) return
 
     const getDetails = async () => {
@@ -84,13 +82,7 @@ const movieDetail = () => {
             <S.Description>{details.overview}</S.Description>
             <CategoriesList title="Categories" listGenres={details.genres} />
             {similar && (
-              <Carrousel
-                title="Peliculas Similares"
-                listMovies={similar}
-                onClick={() => {
-                  console.log('')
-                }}
-              />
+              <Carrousel title="Peliculas Similares" listMovies={similar} />
             )}
           </S.DescriptionContainer>
         </>

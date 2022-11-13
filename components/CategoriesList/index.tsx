@@ -16,20 +16,24 @@ interface IListGenres {
 type TCarrousel = {
   title: string
   listGenres: IListGenres[]
-  onClick?: (() => void) | null
+  onClick?: () => void
 }
 
 const CategoriesList: React.FC<TCarrousel> = ({
   title,
   listGenres,
-  onClick = null
+  onClick
 }: TCarrousel) => {
   return (
     <Section title={title} onClick={onClick}>
       <S.ListContainer>
         {listGenres.map(({ id, name }) => {
           return (
-            <Link href={`/genres/${id}`} key={id} passHref>
+            <Link
+              href={{ pathname: `/genres/${id}`, query: { genreName: name } }}
+              key={id}
+              passHref
+            >
               <S.AnchorListItem>
                 <ListItem text={name} />
               </S.AnchorListItem>

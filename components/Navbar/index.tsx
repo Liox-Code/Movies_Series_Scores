@@ -28,7 +28,6 @@ const Navbar = () => {
   }
 
   const IfClickedOutside = useIfClickedOutside(() => {
-    console.log('cerrar')
     setShowMenu(false)
   })
 

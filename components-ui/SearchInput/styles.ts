@@ -1,5 +1,8 @@
 import styled from 'styled-components'
 
+// Components
+import Button from '@components-ui/Button'
+
 export const Container = styled.label`
   display: grid;
   grid-template-columns: auto max-content;
@@ -14,9 +17,8 @@ export const SearchInputText = styled.input`
   font-size: 1.6rem;
 `
 
-export const SearchButton = styled.button`
+export const SearchButton = styled(Button)`
   height: 100%;
   padding: 8px;
-  background-color: var(--secondary-color);
   color: var(--black);
 `

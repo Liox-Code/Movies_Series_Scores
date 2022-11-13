@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 
 // Components
 import PosterImage from '@components-ui/PosterImage'
@@ -35,7 +36,6 @@ export const getStaticPaths = async () => {
       fallback: false
     }
   } catch (error) {
-    console.error(error)
     return {
       paths: [],
       fallback: false
@@ -51,7 +51,6 @@ export const getStaticProps = async () => {
       }
     }
   } catch (error) {
-    console.error(error)
     return {
       props: {
         data: []
@@ -71,12 +70,15 @@ type TCategoryPost = {
 }
 
 const categoryPost: React.FC<TCategoryPost> = ({ data }: TCategoryPost) => {
+  const router = useRouter()
+  const { genreName } = router.query
+
   return (
     <S.Container>
       <Button action="previousPage" color="red01">
         Volver
       </Button>
-      <S.Title>Titulo</S.Title>
+      {genreName && <S.Title>{genreName}</S.Title>}
       <S.Content>
         {data.map(movieData => {
           const { id, title, poster_path: posterPath } = movieData

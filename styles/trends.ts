@@ -3,18 +3,10 @@ import styled from 'styled-components'
 export const Container = styled.section`
   display: grid;
   grid-gap: 20px;
-  grid-template-rows: repeat(2, 40px) auto;
+  grid-template-rows: repeat(2, 40px) auto 40px;
   justify-items: start;
   padding: 28px 20px;
   background-color: var(--black);
-`
-
-export const Button = styled.button`
-  min-height: 40px;
-  padding: 0 20px;
-  background-color: var(--primary-color);
-  color: var(--white);
-  font-size: 1.6rem;
 `
 
 export const Title = styled.h1`
