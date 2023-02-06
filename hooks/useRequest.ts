@@ -1,8 +1,15 @@
 import { useState, useEffect } from 'react'
 import { AxiosRequestConfig } from 'axios'
 
+type TParams = { pageNum: number; searchText?: string }
+
+export type TGetRequestArgs = {
+  params: TParams
+  options?: AxiosRequestConfig
+}
+
 type TGetRequest = {
-  (pageNum: number, options: AxiosRequestConfig | undefined): Promise<any>
+  (args: TGetRequestArgs): Promise<any>
 }
 
 type TResults = {
@@ -24,7 +31,7 @@ type TResults = {
 
 const useRequest = (
   getRequest: TGetRequest,
-  pageNum = 1,
+  params: TParams,
   initialData: TResults[] = []
 ) => {
   const [results, setResults] = useState<TResults[]>(initialData)
@@ -41,7 +48,7 @@ const useRequest = (
     const controller = new AbortController()
     const { signal } = controller
 
-    getRequest(pageNum, { signal })
+    getRequest({ params, options: { signal } })
       .then(data => {
         setResults(prev => [...prev, ...data.results])
         setIsLoading(false)
@@ -53,11 +60,11 @@ const useRequest = (
         setError({ message: e.message })
       })
       .finally(() => {
-        setHasNextPage(Boolean(pageNum <= 500))
+        setHasNextPage(Boolean(params.pageNum <= 500))
       })
 
     return () => controller.abort()
-  }, [pageNum])
+  }, [params.pageNum])
 
   return { results, isLoading, isError, error, hasNextPage }
 }

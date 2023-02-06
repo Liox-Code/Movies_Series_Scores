@@ -23,8 +23,8 @@ const theme = {
   }
 }
 
-const Section: React.FC<TTheme> = ({ children }: TTheme) => {
+const Theme: React.FC<TTheme> = ({ children }: TTheme) => {
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>
 }
 
-export default Section
+export default Theme
